@@ -2,13 +2,10 @@ import readline from "node:readline/promises";
 import { stdin, stdout } from "node:process";
 import { EOL } from "node:os";
 import { ERROR } from "../constants/constants.js";
+import { setData } from "./setData.js";
 
 async function start() {
-  const commands = {
-    up: (params) => console.log("up", params),
-    cd: (params) => console.log("cd", params),
-    ls: (params) => console.log("ls", params),
-  };
+  const { nwd, commands } = setData();
 
   const rl = readline.createInterface(stdin, stdout);
   rl.on("SIGINT", () => {
@@ -16,9 +13,8 @@ async function start() {
   });
 
   while (true) {
-    const currentDirectory = "user";
     const answer = await rl.question(
-      `\nYou are currently in ${currentDirectory}${EOL}${EOL}>`
+      `\nYou are currently in ${nwd.currentDirectory}${EOL}${EOL}>`
     );
 
     if (answer.trim() === ".exit") {
