@@ -3,6 +3,7 @@ import { stdin, stdout } from "node:process";
 import { EOL } from "node:os";
 import { ERROR } from "../constants/constants.js";
 import { setData } from "./setData.js";
+import { parseArgs } from "./parseArgs.js";
 
 async function start() {
   const { nwd, commands } = setData();
@@ -23,9 +24,13 @@ async function start() {
 
     try {
       const [command, ...params] = answer.split(" ");
-      commands[command](params);
-    } catch {
-      console.error(ERROR.INVALID_INPUT);
+      await commands[command](parseArgs(params));
+    } catch (err) {
+      console.error(
+        err.message === ERROR.OPERATION_FAILED
+          ? ERROR.OPERATION_FAILED
+          : ERROR.INVALID_INPUT
+      );
     }
   }
 }
