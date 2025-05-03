@@ -71,6 +71,10 @@ class NWD {
       return false;
     }
   };
+
+  getPath = (...newPatch) => {
+    return resolve(this.#currentDirectory, ...newPatch);
+  };
 }
 
 export { NWD };

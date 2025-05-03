@@ -3,7 +3,6 @@ import { stdout, argv } from "node:process";
 import { EOL } from "node:os";
 
 function init() {
-  console.log("init");
   let exit_message = `For start application you must pass your username.\nPlease run the application with the command:  npm run start -- ${PREFIX_USER_NAME}your_username`;
 
   process.on("exit", () => {
