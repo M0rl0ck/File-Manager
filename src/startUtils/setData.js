@@ -16,6 +16,7 @@ function setData() {
     cp: fs.cp,
     mv: fs.mv,
     rm: fs.rm,
+    os: osData.getOsData,
   };
   return { nwd, commands };
 }
