@@ -1,10 +1,11 @@
-import { OsData, NWD, FileSystem, Crypto } from "../tools/index.js";
+import { OsData, NWD, FileSystem, Crypto, Arch } from "../tools/index.js";
 
 function setData() {
   const osData = new OsData();
   const nwd = new NWD(osData.homedir);
   const fs = new FileSystem(nwd);
   const crypto = new Crypto(nwd);
+  const arch = new Arch(nwd);
 
   const commands = {
     up: nwd.up,
@@ -19,6 +20,8 @@ function setData() {
     rm: fs.rm,
     os: osData.getOsData,
     hash: crypto.calculateHash,
+    compress: arch.compress,
+    decompress: arch.decompress,
   };
   return { nwd, commands };
 }
